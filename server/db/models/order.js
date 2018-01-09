@@ -2,9 +2,6 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Order = db.define('order', {
-  products: {
-    type: Sequelize.ARRAY(Sequelize.INTEGER)
-  },
   completed: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
@@ -21,5 +18,7 @@ const Order = db.define('order', {
     type: Sequelize.TEXT
   }
 })
+
+//order.getOrderProducts() returns a promise for an array of all the order's ordered products
 
 module.exports = Order
