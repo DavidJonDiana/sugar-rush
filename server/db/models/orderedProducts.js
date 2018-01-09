@@ -12,4 +12,4 @@ const OrderedProducts = db.define('orderedProducts', {
   }
 })
 
-module.exports = OrderedProducts
+module.exports = OrderedProducts;
