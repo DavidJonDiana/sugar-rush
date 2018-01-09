@@ -1,6 +1,6 @@
 const User = require('./user')
 const Review = require('./review')
-const Product = require('.product')
+const Product = require('./product')
 const Order = require('./order')
 const OrderedProduct = require('./orderedProduct')
 
@@ -33,5 +33,9 @@ OrderedProduct.belongsTo(Product);
  * instead of: const User = require('../db/models/user')
  */
 module.exports = {
-  User
+  User,
+  Product,
+  Review,
+  Order,
+  OrderedProduct
 }
