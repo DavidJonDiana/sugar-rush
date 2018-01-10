@@ -11,11 +11,9 @@ Review.belongsTo(Product);
 Product.hasMany(Review);
 
 Order.belongsTo(User);
-
-OrderedProducts.belongsTo(Order);
 Order.hasMany(OrderedProducts);
 
-
+OrderedProducts.belongsTo(Order);
 OrderedProducts.belongsTo(Product);
 
 
