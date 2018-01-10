@@ -4,7 +4,7 @@ import ProductListItem from './product-list-item';
 import { Card } from 'semantic-ui-react'
 import { getProductsThunk } from '../store/products'
 
-export class ProductList extends Component {
+class ProductList extends Component {
 
   componentDidMount() {
     this.props.getProducts()
