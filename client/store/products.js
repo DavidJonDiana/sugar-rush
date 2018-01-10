@@ -40,8 +40,29 @@ const getSingleProduct = singleProduct => ({ type: GET_SINGLE_PRODUCT, singlePro
  * THUNK CREATORS
  */
 
+export function getProductsThunk() {
+  return function thunk(dispatch) {
+    return axios.get('/api/products')
+      .then(res => res.data)
+      .then(products => {
+        dispatch(getProducts(products))
+    })
+  }
+}
+
 
 
 /**
  * REDUCER
  */
+
+export default function (state = initialState, action) {
+  switch (action.type) {
+    case GET_PRODUCTS:
+      return action.products
+    case GET_SINGLE_PRODUCT:
+      return action.singleProduct
+    default:
+      return state
+  }
+}

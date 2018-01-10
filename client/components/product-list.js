@@ -1,35 +1,44 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import ProductListItem from './product-list-item';
 import { Card } from 'semantic-ui-react'
+import { getProductsThunk } from '../store/products'
 
-const dummyproducts = [{
-  name: 'dummy',
-  imageUrl: 'http://www.fillmurray.com/200/250',
-  description: 'a great candy',
-  id: 1,
-  price: 10.00
-},
-  {
-    name: 'data',
-    imageUrl: 'http://www.fillmurray.com/200/250',
-    description: 'yum',
-    id: 2,
-    price: 10.00
-  }]
+export class ProductList extends Component {
 
+  componentDidMount() {
+    this.props.getProducts()
+  }
 
-const ProductList = (props) => {
-  return (
-    <div>
-      <div className="title">
-        <h3>Products</h3>
+  render() {
+    return (
+      <div>
+        <div className="title">
+          <h3>Products</h3>
+        </div>
+        <Card.Group>
+          {this.props.products.map(product => <ProductListItem product={product} key={product.id} />
+          )}
+        </Card.Group>
       </div>
-     <Card.Group>
-        {dummyproducts.map(product => <ProductListItem product={product} key={product.id} />
-        )}
-      </Card.Group>
-    </div>
-  )
+    )
+  }
 }
 
-export default ProductList;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getProducts: () => {
+      dispatch(getProductsThunk())
+    }
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    products: state.products
+  }
+}
+
+const ProductListContainer = connect(mapStateToProps, mapDispatchToProps)(ProductList)
+
+export default ProductListContainer;
