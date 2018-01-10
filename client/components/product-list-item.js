@@ -1,9 +1,9 @@
-import React from 'react';
-
+import React from 'react'
+import { NavLink } from 'react-router-dom'
 import { Card, Icon, Image, Button } from 'semantic-ui-react'
 
 const ProductListItem = (props) => {
-  const {imageUrl, name, price, description} = props.product;
+  const {imageUrl, name, price, description, id} = props.product;
   return (
     <Card>
       <Image src={imageUrl} />
@@ -21,10 +21,11 @@ const ProductListItem = (props) => {
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
-        <Button>
-          <Icon name='cart' />
-          Add to Cart
-        </Button>
+        <NavLink to={`/products/${id}`}>
+          <Button >
+            View Item
+          </Button>
+        </NavLink>
       </Card.Content>
     </Card>
   )

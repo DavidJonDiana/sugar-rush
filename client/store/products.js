@@ -6,7 +6,6 @@ import history from '../history'
  */
 
 const GET_PRODUCTS = 'GET_PRODUCTS'
-const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
 
 
 /**
@@ -20,8 +19,7 @@ const initialState = [];
  * ACTION CREATORS
  */
 
-const getProducts = products => ({ type: GET_PRODUCTS, products })
-const getSingleProduct = singleProduct => ({ type: GET_SINGLE_PRODUCT, singleProduct })
+const getProducts = products => ({ type: GET_PRODUCTS, products });
 
 /**
  * THUNK CREATORS
@@ -38,7 +36,6 @@ export function getProductsThunk() {
 }
 
 
-
 /**
  * REDUCER
  */
@@ -46,10 +43,8 @@ export function getProductsThunk() {
 export default function (state = initialState, action) {
   switch (action.type) {
     case GET_PRODUCTS:
-      return action.products
-    case GET_SINGLE_PRODUCT:
-      return action.singleProduct
+      return action.products;
     default:
-      return state
+      return state;
   }
 }

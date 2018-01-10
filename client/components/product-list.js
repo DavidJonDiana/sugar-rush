@@ -16,7 +16,7 @@ export class ProductList extends Component {
         <div className="title">
           <h3>Products</h3>
         </div>
-        <Card.Group>
+        <Card.Group style={{ margin: 5 }}>
           {this.props.products.map(product => <ProductListItem product={product} key={product.id} />
           )}
         </Card.Group>
