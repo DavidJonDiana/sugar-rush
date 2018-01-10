@@ -9,12 +9,34 @@ describe('User model', () => {
     return db.sync({force: true})
   })
 
+  describe('name getter', () => {
+    let cody
+    beforeEach(() => {
+      return User.create({
+        firstName: 'Cody',
+        lastName: 'Coder',
+        email: 'cody@puppybook.com',
+        password: 'bones'
+      })
+        .then(user => {
+          cody = user
+        })
+    })
+
+    it('returns the correct value for name', () => {
+      expect(cody.name).to.be.equal('Cody Coder')
+    })
+
+  })
+
   describe('instanceMethods', () => {
     describe('correctPassword', () => {
       let cody
 
       beforeEach(() => {
         return User.create({
+          firstName: 'Cody',
+          lastName: 'Coder',
           email: 'cody@puppybook.com',
           password: 'bones'
         })
