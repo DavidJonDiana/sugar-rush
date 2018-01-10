@@ -13,20 +13,7 @@ const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
  * INITIAL STATE
  */
 
-const initialState = [{
-    name: 'dummy',
-    imageUrl: 'http://www.fillmurray.com/200/250',
-    description: 'a great candy',
-    id: 1,
-    price: 10.00
-  },
-  {
-    name: 'data',
-    imageUrl: 'http://www.fillmurray.com/200/250',
-    description: 'yum',
-    id: 2,
-    price: 10.00
-  }]
+const initialState = [];
 
 
 /**
