@@ -10,15 +10,18 @@ const Order = db.define('order', {
     type: Sequelize.BOOLEAN,
     defaultValue: false
   },
-  total: {
-    type: Sequelize.FLOAT,
-    allowNull: false
-  },
   comments: {
     type: Sequelize.TEXT
   }
 })
 
-//order.getOrderProducts() returns a promise for an array of all the order's ordered products
+//instance methods
+
+Order.prototype.getTotal = function() {
+  return this.getOrderedProducts()
+    .then(ops => {
+      return ops.map(op => op.subtotal).reduce((a, b) => a + b)
+    })
+}
 
 module.exports = Order
