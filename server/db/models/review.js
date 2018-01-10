@@ -18,6 +18,12 @@ const Review = db.define('review', {
   recommended: {
     type: Sequelize.BOOLEAN
   }
+  // title: {
+  //   type: Sequelize.VIRTUAL,
+  //   get() {
+  //     return this.dataValue('textReview').slice(0, 25) + '...'
+  //   }
+  // }
 })
 
 module.exports = Review;

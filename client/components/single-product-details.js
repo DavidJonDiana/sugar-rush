@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Item, Button, Form, Grid, Divider } from 'semantic-ui-react';
 import { connect } from 'react-redux'
 import { getCurrentProductThunk } from '../store/currentProduct';
+import { ReviewList } from './index'
 
 
 
@@ -11,10 +12,11 @@ export class SingleProductDetails extends Component {
         this.props.getCurrentProduct(this.props.match.params.id)
     }
 
-    
+
     render () {
         const { imageUrl, title, description, category, price } = this.props.currentProduct
-        return (
+      return (
+          <div>
             <Grid columns={3} relaxed>
                 <Grid.Column>
                     <Item>
@@ -47,6 +49,8 @@ export class SingleProductDetails extends Component {
                     </Form>
                 </Grid.Column>
             </Grid>
+          <ReviewList />
+          </div>
         )
     }
 }
@@ -61,9 +65,10 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getCurrentProduct: (currentProductId) => {
             dispatch(getCurrentProductThunk(currentProductId))
-        } 
+        }
     }
 }
 
 const SingleProductDetailsContainer = connect(mapStateToProps, mapDispatchToProps)(SingleProductDetails)
-export default SingleProductDetailsContainer
+
+export default SingleProductDetailsContainer;

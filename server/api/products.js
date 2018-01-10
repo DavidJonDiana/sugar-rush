@@ -24,7 +24,6 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
     res.send(req.product)
-        .catch(next);
 })
 
 router.delete('/:id', (req, res, next) => {
