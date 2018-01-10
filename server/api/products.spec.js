@@ -6,20 +6,20 @@ const db = require('../db');
 const app = require('../index');
 const Product = db.model('product');
 
-describe('User routes', () => {
+describe('Product routes', () => {
     beforeEach(() => {
         return db.sync({force: true})
     })
-    
+
     describe('/api/products/', () => {
 
         beforeEach(() => {
             return Product.create({
                 title: 'test product',
-                price: '3.99',
-                // imageUrl: 'http://fillmurray.com/200/300',
-                // inventoryQuantity: 100,
-                // category: 'dont matter'
+                price: 3.99,
+                imageUrl: 'http://fillmurray.com/200/300',
+                inventoryQuantity: 100,
+                category: 'dont matter'
             })
         })
 
@@ -30,9 +30,9 @@ describe('User routes', () => {
             .then(res => {
                 expect(res.body).to.be.an('array')
                 expect(res.body[0].title).to.be.equal('test product')
-                expect(res.body[0].price).to.be.equal('3.99')
+                expect(res.body[0].price).to.be.equal(3.99)
             })
         })
     })
-    
+
 })
