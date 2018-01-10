@@ -11,5 +11,28 @@ describe('User routes', () => {
         return db.sync({force: true})
     })
     
+    describe('/api/products/', () => {
+
+        beforeEach(() => {
+            return Product.create({
+                title: 'test product',
+                price: '3.99',
+                // imageUrl: 'http://fillmurray.com/200/300',
+                // inventoryQuantity: 100,
+                // category: 'dont matter'
+            })
+        })
+
+        it('GET /api/products', () => {
+            return request(app)
+            .get('/api/products')
+            .expect(200)
+            .then(res => {
+                expect(res.body).to.be.an('array')
+                expect(res.body[0].title).to.be.equal('test product')
+                expect(res.body[0].price).to.be.equal('3.99')
+            })
+        })
+    })
     
 })
