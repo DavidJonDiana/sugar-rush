@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Item, Button, Form, Grid, Divider } from 'semantic-ui-react';
 import { connect } from 'react-redux'
 import { getCurrentProductThunk } from '../store/currentProduct';
-import { ReviewList } from './index'
+import { ReviewList, ReviewForm } from './index'
 
 
 
@@ -50,6 +50,7 @@ export class SingleProductDetails extends Component {
                 </Grid.Column>
             </Grid>
           <ReviewList />
+          <ReviewForm product={this.props.currentProduct} />
           </div>
         )
     }
