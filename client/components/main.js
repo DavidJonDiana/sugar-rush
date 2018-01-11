@@ -17,11 +17,12 @@ const Main = (props) => {
     <div>
       <h1>BOILERMAKER</h1>
       <nav>
+        <Link to="/">Home</Link>
         {
           isLoggedIn
             ? <div>
               {/* The navbar will show these links after you log in */}
-              <Link to="/home">Home</Link>
+              <Link to="/my-profile">My Profile</Link>
               <a href="#" onClick={handleClick}>Logout</a>
             </div>
             : <div>
