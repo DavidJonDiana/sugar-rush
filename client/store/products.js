@@ -31,6 +31,7 @@ export function getProductsThunk() {
       .then(res => res.data)
       .then(products => {
         dispatch(getProducts(products))
+      // OB/AZ: no error handling here, reports errors to user instead of developer, e.g. like this: https://tomchentw.github.io/react-toastr/
     })
   }
 }

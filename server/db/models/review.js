@@ -18,6 +18,7 @@ const Review = db.define('review', {
   recommended: {
     type: Sequelize.BOOLEAN
   }
+  // OB/AZ: dead code below, keep it out of master, you might put the code below into an issue
   // title: {
   //   type: Sequelize.VIRTUAL,
   //   get() {

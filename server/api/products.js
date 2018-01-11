@@ -1,12 +1,13 @@
 const router = require('express').Router();
 const { Product } = require('../db/models');
 
-
+// OB/AZ: nice!
 router.param('id', (req, res, next, id) => {
     Product.findById(id)
         .then(product => {
             if (!product) {
                 let error = new Error('Product not found')
+                // OB/AZ: consider attaching a 404 status
                 throw error;
             } else {
                 req.product = product;

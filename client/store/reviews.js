@@ -30,6 +30,7 @@ export function getReviewsThunk() {
     return axios.get('/api/reviews')
       .then(res => res.data)
       .then(reviews => {
+        // OB/AZ: dead code
         console.log('REVIEWS IN THUNK', reviews)
         dispatch(getReviews(reviews))
       })

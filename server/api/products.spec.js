@@ -29,6 +29,7 @@ describe('Product routes', () => {
             .expect(200)
             .then(res => {
                 expect(res.body).to.be.an('array')
+                // OB/AZ: consider expectations about the length too
                 expect(res.body[0].title).to.be.equal('test product')
                 expect(res.body[0].price).to.be.equal(3.99)
             })
