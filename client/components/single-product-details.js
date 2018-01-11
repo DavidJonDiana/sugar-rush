@@ -14,6 +14,7 @@ export class SingleProductDetails extends Component {
 
 
     render () {
+        // OB/AZ: watch out for inconsistent indentation
         const { imageUrl, title, description, category, price } = this.props.currentProduct
       return (
           <div>

@@ -8,6 +8,7 @@ import {auth} from '../store'
  */
 class AuthForm extends Component {
 
+  // OB/AZ: could be a SignupField component
   renderSignupFields() {
     return (
       <div>

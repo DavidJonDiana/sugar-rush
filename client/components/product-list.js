@@ -25,6 +25,10 @@ class ProductList extends Component {
   }
 }
 
+// OB/AZ: if your mapDispatchToProps is of the format dispatch => ({foo: () => dispatch(actionCreator())}), you can instead use the "object format"
+/*
+const mapDispatchToProps = {getProducts: getProductsThunk};
+*/
 const mapDispatchToProps = (dispatch) => {
   return {
     getProducts: () => {
