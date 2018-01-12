@@ -21,7 +21,7 @@ export class SingleProductDetails extends Component {
     componentDidMount() {
         this.props.getCurrentProduct(this.props.match.params.id)
     }
-
+  
     handleAddToCart() {
         this.props.addToCart(this.props.currentProduct.id, this.state.quantity)
     }

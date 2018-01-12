@@ -12,11 +12,25 @@ class ReviewForm extends Component {
     }
 
     // this.handleChange = this.handleChange.bind(this);
+
+    //handleRecommendChange --- if has class 'checked', this.setState recommended to true
+    // look to see what the object (second parameter) gives you
+
+
+    this.handleRecommendedChange = this.handleRecommendedChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleRatingChange = this.handleRatingChange.bind(this);
+
 
 }
 
+  handleRecommendedChange(event, object) {
+    console.log(object)
+  }
 
+  handleRatingChange(event, object) {
+    console.log(object)
+  }
 
   handleSubmit() {
     const { rating, textReview, recommended } = this.state
