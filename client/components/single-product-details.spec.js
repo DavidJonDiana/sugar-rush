@@ -19,11 +19,11 @@ describe('SingleProductDetails component', () => {
       category: 'apples',
       price: 4.99
     };
-    fakeComponent = shallow(<SingleProductDetails currentProduct={currentProduct} />)
+    fakeComponent = shallow(<SingleProductDetails currentProduct={currentProduct} getCurrentProduct={(id)=> id} match={{params: {id: 1}}} />)
   });
 
   it('renders correct title', () => {
-    expect(fakeComponent.find('h2')).to.be.equal('Some Title');
+    expect(fakeComponent.find('h2').text()).to.be.equal('Some Title');
   })
 
 })
