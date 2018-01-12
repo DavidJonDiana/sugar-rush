@@ -12,7 +12,6 @@ export class SingleProductDetails extends Component {
         this.props.getCurrentProduct(this.props.match.params.id)
     }
 
-
     render () {
         const { imageUrl, title, description, category, price } = this.props.currentProduct
       return (
