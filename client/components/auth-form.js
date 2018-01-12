@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
@@ -6,28 +6,49 @@ import {auth} from '../store'
 /**
  * COMPONENT
  */
-const AuthForm = (props) => {
-  const {name, displayName, handleSubmit, error} = props
+class AuthForm extends Component {
 
-  return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
+  renderSignupFields() {
+    return (
+      <div>
         <div>
-          <label htmlFor="email"><small>Email</small></label>
-          <input name="email" type="text" />
+          <label htmlFor="firstName"><small>First Name</small></label>
+          <input name="firstName" type="text" />
         </div>
         <div>
-          <label htmlFor="password"><small>Password</small></label>
-          <input name="password" type="password" />
+          <label htmlFor="lastName"><small>Last Name</small></label>
+          <input name="lastName" type="text" />
         </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-      <a href="/auth/google">{displayName} with Google</a>
-    </div>
-  )
+      </div>
+    )
+  }
+
+  render() {
+    const {name, displayName, handleSubmit, error} = this.props
+
+    return (
+      <div>
+        <form onSubmit={handleSubmit} name={name}>
+          {
+            name === 'signup' && this.renderSignupFields()
+          }
+          <div>
+            <label htmlFor="email"><small>Email</small></label>
+            <input name="email" type="text" />
+          </div>
+          <div>
+            <label htmlFor="password"><small>Password</small></label>
+            <input name="password" type="password" />
+          </div>
+          <div>
+            <button type="submit">{displayName}</button>
+          </div>
+          {error && error.response && <div> {error.response.data} </div>}
+        </form>
+        <a href="/auth/google">{displayName} with Google</a>
+      </div>
+    )
+  }
 }
 
 /**
@@ -58,9 +79,11 @@ const mapDispatch = (dispatch) => {
     handleSubmit (evt) {
       evt.preventDefault()
       const formName = evt.target.name
+      const firstName = evt.target.firstName.value
+      const lastName = evt.target.lastName.value
       const email = evt.target.email.value
       const password = evt.target.password.value
-      dispatch(auth(email, password, formName))
+      dispatch(auth(email, password, formName, firstName, lastName))
     }
   }
 }
