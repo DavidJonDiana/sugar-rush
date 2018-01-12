@@ -23,13 +23,14 @@ export function getCurrentProductThunk(currentProductId) {
             .then(currentProduct => {
                 dispatch(getCurrentProduct(currentProduct))
             })
+            .catch(console.error)
     }
 }
 
 //REDUCER
 
 export default function (state = intitalState, action) {
-    switch(action.type) {
+    switch (action.type) {
         case GET_CURRENT_PRODUCT:
             return action.currentProduct;
         default:
