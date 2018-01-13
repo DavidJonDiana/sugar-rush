@@ -34,6 +34,7 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
     const googleId = profile.id
     const firstName = profile.displayName.split(' ')[0]
     const lastName = profile.displayName.split(' ')[1]
+    console.log(firstName, lastName)
     const email = profile.emails[0].value
 
     User.find({where: {googleId}})
