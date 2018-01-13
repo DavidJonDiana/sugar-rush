@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import toastr from 'toastr'
 
 /**
  * ACTION TYPES
@@ -26,12 +27,10 @@ export const me = () =>
     axios.get('/auth/me')
       .then(res =>
         dispatch(getUser(res.data || defaultUser)))
-      .catch(err => console.log(err))
+      .catch(() => toastr.error('Sorry! Please try logging in again'))
 
 export const auth = (email, password, method, firstName, lastName) =>
   dispatch => {
-
-    console.log(email, password, method, firstName, lastName)
     axios.post(`/auth/${method}`, { email, password, firstName, lastName })
       .then(res => {
         dispatch(getUser(res.data))
@@ -39,7 +38,7 @@ export const auth = (email, password, method, firstName, lastName) =>
       }, authError => { // rare example: a good use case for parallel (non-catch) error handler
         dispatch(getUser({error: authError}))
       })
-      .catch(dispatchOrHistoryErr => console.error(dispatchOrHistoryErr))
+      .catch(dispatchOrHistoryErr => toastr.error(dispatchOrHistoryErr))
   }
 
 export const logout = () =>
@@ -49,7 +48,7 @@ export const logout = () =>
         dispatch(removeUser())
         history.push('/login')
       })
-      .catch(err => console.log(err))
+      .catch((err) => toastr.error(err))
 
 /**
  * REDUCER

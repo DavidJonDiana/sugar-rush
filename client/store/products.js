@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import toastr from 'toastr'
 
 /**
  * ACTION TYPES
@@ -32,7 +33,7 @@ export function getProductsThunk() {
       .then(products => {
         dispatch(getProducts(products))
       })
-      .catch(console.error)
+      .catch(() => toastr.error('Sorry! Products cannot be displayed.'))
   }
 }
 

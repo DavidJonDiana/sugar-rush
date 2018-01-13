@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import toastr from 'toastr'
 
 // ACTION TYPES
 
@@ -23,7 +24,7 @@ export function getCurrentProductThunk(currentProductId) {
             .then(currentProduct => {
                 dispatch(getCurrentProduct(currentProduct))
             })
-            .catch(console.error)
+          .catch(() => toastr.error('Sorry! The current product cannot be displayed.'))
     }
 }
 

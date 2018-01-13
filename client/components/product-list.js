@@ -25,13 +25,7 @@ class ProductList extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getProducts: () => {
-      dispatch(getProductsThunk())
-    }
-  }
-}
+const mapDispatchToProps = {getProducts: getProductsThunk}
 
 const mapStateToProps = (state) => {
   return {

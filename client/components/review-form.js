@@ -35,7 +35,6 @@ class ReviewForm extends Component {
   }
 
   handleSubmit() {
-    console.log('userid', this.props.user.id);
     this.props.addReviewThunk({
       rating: this.state.rating,
       textReview: this.state.textReview,

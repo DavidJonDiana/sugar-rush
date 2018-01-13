@@ -21,7 +21,7 @@ export class SingleProductDetails extends Component {
     componentDidMount() {
         this.props.getCurrentProduct(this.props.match.params.id)
     }
-  
+
     handleAddToCart() {
         this.props.addToCart(this.props.currentProduct.id, this.state.quantity)
     }
@@ -32,7 +32,7 @@ export class SingleProductDetails extends Component {
 
     render () {
         const { imageUrl, title, description, category, price } = this.props.currentProduct
-      return (
+        return (
           <div>
             <Grid columns={3} relaxed>
                 <Grid.Column>
@@ -58,8 +58,7 @@ export class SingleProductDetails extends Component {
                     <h3>Price</h3>
                     <h4>{price}</h4>
                     <Form>
-                        <Form.Select onChange={this.handleSelectChange} placeholder='Select Amount' options={[{ text: 1, value: 1 }, { text: 2, value: 2 }, { text: 3, value: 3 }, { text: 4, value: 4 }, { text: 5, value: 5 }]}>
-                        </Form.Select>
+                        <Form.Select onChange={this.handleSelectChange} placeholder='Select Amount' options={[{ text: 1, value: 1 }, { text: 2, value: 2 }, { text: 3, value: 3 }, { text: 4, value: 4 }, { text: 5, value: 5 }]} />
                         <Button onClick={this.handleAddToCart} type='submit'>Add To Cart</Button>
                     </Form>
                 </Grid.Column>
