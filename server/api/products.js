@@ -6,11 +6,12 @@ router.param('id', (req, res, next, id) => {
     Product.findById(id)
         .then(product => {
             if (!product) {
-                let error = new Error('Product not found')
-                throw error;
+              let error = new Error('Product not found')
+              error.status(404);
+              throw error;
             } else {
-                req.product = product;
-                next();
+              req.product = product;
+              next();
             }
         })
         .catch(next);

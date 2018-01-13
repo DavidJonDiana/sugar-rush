@@ -28,9 +28,10 @@ describe('Product routes', () => {
             .get('/api/products')
             .expect(200)
             .then(res => {
-                expect(res.body).to.be.an('array')
-                expect(res.body[0].title).to.be.equal('test product')
-                expect(res.body[0].price).to.be.equal(3.99)
+              expect(res.body).to.be.an('array')
+              expect(res.body.length).to.equal(1)
+                expect(res.body[0].title).to.equal('test product')
+                expect(res.body[0].price).to.equal(3.99)
             })
         })
     })
