@@ -40,12 +40,10 @@ export function getReviewsThunk() {
 
 export function addReviewThunk(reviewData) {
   return function thunk(dispatch) {
-    console.log('review data', reviewData)
     return axios.post(`/api/products/${reviewData.userId}/review`, reviewData)
       .then(res => res.data)
       .then(review => {
-        console.log(review)
-      dispatch(addReview(review))
+        dispatch(addReview(review))
       })
       .catch(console.error)
   }
