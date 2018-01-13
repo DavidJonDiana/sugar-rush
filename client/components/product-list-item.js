@@ -3,13 +3,13 @@ import { NavLink } from 'react-router-dom'
 import { Card, Icon, Image, Button } from 'semantic-ui-react'
 
 const ProductListItem = (props) => {
-  const {imageUrl, name, price, description, id} = props.product;
+  const {imageUrl, price, description, id, title} = props.product;
   return (
     <Card>
       <Image src={imageUrl} />
       <Card.Content>
         <Card.Header>
-          {name}
+          {title}
         </Card.Header>
         <Card.Meta>
           <span className='price'>
