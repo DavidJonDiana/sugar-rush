@@ -15,7 +15,6 @@ class ReviewList extends Component {
   }
 
   render() {
-    console.log('propssssss', this.props)
     return (
       <div>
         <div className="title">
@@ -39,7 +38,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = (state) => {
-  console.log('STATEEEEE', state)
   return {
     reviews: state.reviews
   }

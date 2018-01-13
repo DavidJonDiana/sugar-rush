@@ -22,7 +22,6 @@ router.get('/', (req, res, next) => {
     .catch(next);
 });
 
-
 router.delete('/:id', (req, res, next) => {
   req.review.destroy()
     .then(() => res.sendStatus(204))

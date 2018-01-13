@@ -11,19 +11,20 @@ const Review = db.define('review', {
   },
   textReview: {
     type: Sequelize.TEXT,
+    allowNull: false,
     validate: {
       len: [40, 400]
     }
   },
   recommended: {
     type: Sequelize.BOOLEAN
+  },
+  title: {
+    type: Sequelize.VIRTUAL,
+    get() {
+      return this.getDataValue('textReview').slice(0, 25) + '...'
+    }
   }
-  // title: {
-  //   type: Sequelize.VIRTUAL,
-  //   get() {
-  //     return this.dataValue('textReview').slice(0, 25) + '...'
-  //   }
-  // }
 })
 
 module.exports = Review;

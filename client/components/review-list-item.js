@@ -7,14 +7,13 @@ const ReviewListItem = (props) => {
   return (
     <Item>
       <Item.Content>
-        <Item.Header as='a'>Title</Item.Header>
+        <Item.Header as='a'>{title}</Item.Header>
         <Item.Meta>
           <Rating icon='star' defaultRating={rating} maxRating={5} disabled />
         </Item.Meta>
         <Item.Description>
           {textReview}
         </Item.Description>
-        <Item.Extra>Additional Details</Item.Extra>
       </Item.Content>
     </Item>
   )
