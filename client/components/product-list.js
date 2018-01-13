@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import ProductListItem from './product-list-item';
 import { Card } from 'semantic-ui-react'
 import { getProductsThunk } from '../store/products'
-import { Search } from 'semantic-ui-react'
+import { Search, Dropdown } from 'semantic-ui-react'
+
+export const makeCategories = (products) => products.map(product => product.category).filter((cat, index, arr) => arr.indexOf(cat) === index)
 
 class ProductList extends Component {
 
@@ -12,10 +14,12 @@ class ProductList extends Component {
 
     this.state = {
       searchTerm: '',
-      isLoading: false
+      isLoading: false,
+      filterCategories: []
     }
 
     this.handleSearchChange = this.handleSearchChange.bind(this)
+    this.handleCategoryFilter = this.handleCategoryFilter.bind(this)
   }
 
   componentDidMount() {
@@ -30,13 +34,29 @@ class ProductList extends Component {
     }, 500)
   }
 
+  handleCategoryFilter(e, { value }) {
+    this.setState({ filterCategories: value})
+  }
+
   render() {
 
     let products = this.props.products;
+    let selectedCategories = this.state.filterCategories
+    let categories = makeCategories(products)
 
     if (this.state.searchTerm) {
       products = products.filter((product) => product.title.toLowerCase().startsWith(this.state.searchTerm.toLowerCase()))
     }
+
+    if (selectedCategories.length) {
+      products = products.filter(product => selectedCategories.includes(product.category))
+    }
+
+    const options = categories.map((category, index) => ({
+      key: index,
+      value: category,
+      text: category
+    }))
 
     return (
       <div>
@@ -49,6 +69,14 @@ class ProductList extends Component {
             onSearchChange={this.handleSearchChange}
             value={this.state.searchTerm}
             showNoResults={false}
+          />
+          <Dropdown
+            onChange={this.handleCategoryFilter}
+            options={options}
+            placeholder='Filter by category'
+            fluid
+            multiple
+            selection
           />
         </div>
         <Card.Group style={{ margin: 5 }}>
