@@ -31,7 +31,8 @@ export function getProductsThunk() {
       .then(res => res.data)
       .then(products => {
         dispatch(getProducts(products))
-    })
+      })
+      .catch(console.error)
   }
 }
 
