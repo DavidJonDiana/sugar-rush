@@ -13,7 +13,7 @@ const ProductListItem = (props) => {
         </Card.Header>
         <Card.Meta>
           <span className='price'>
-            {price}
+            ${price}
           </span>
         </Card.Meta>
         <Card.Description>
