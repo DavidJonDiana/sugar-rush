@@ -10,15 +10,8 @@ class ReviewForm extends Component {
     this.state = {
       rating: 0,
       textReview: '',
-      recommended: false,
-      userId: null,
-      productId: null
+      recommended: false
     }
-
-    // this.handleChange = this.handleChange.bind(this);
-
-    //handleRecommendChange --- if has class 'checked', this.setState recommended to true
-    // look to see what the object (second parameter) gives you
 
 
     this.handleRecommendedChange = this.handleRecommendedChange.bind(this);
@@ -26,8 +19,8 @@ class ReviewForm extends Component {
     this.handleRatingChange = this.handleRatingChange.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
 
+  }
 
-}
 
   handleRecommendedChange(event, object) {
     this.setState({recommended: object.checked})
@@ -42,18 +35,22 @@ class ReviewForm extends Component {
   }
 
   handleSubmit() {
-    this.setState({userId: this.state.user.id, productId: this.props.match.params.id})
-    this.props.addReviewThunk(this.state)
+    console.log('userid', this.props.user.id);
+    this.props.addReviewThunk({
+      rating: this.state.rating,
+      textReview: this.state.textReview,
+      recommended: this.state.recommended,
+      userId: this.props.user.id,
+      productId: this.props.product.id
+    })
   }
 
   render() {
-    const { rating, textReview, recommended } = this.state
-
     return (
       <div>
         <Form onSubmit={this.handleSubmit}>
           <Rating maxRating={5} type='rating' onRate={this.handleRatingChange} />
-          <Form.Input placeholder='Review' name='review' type='text' value={textReview} onChange={this.handleTextChange} />
+          <Form.Input placeholder='Review' name='review' type='text' onChange={this.handleTextChange} />
           <Form.Checkbox name='recommended' label='Recommended' onChange={this.handleRecommendedChange}/>
             <Form.Button content='Submit' />
         </Form>
@@ -65,9 +62,7 @@ class ReviewForm extends Component {
 const mapDispatchToProps = { addReviewThunk }
 
 const mapStateToProps = (state) => {
-  return {
-    user: state.user
-  };
+  return {};
 }
 
 const ReviewFormContainer = connect(mapStateToProps, mapDispatchToProps)(ReviewForm)

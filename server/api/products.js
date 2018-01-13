@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Product } = require('../db/models');
+const { Product, Review } = require('../db/models');
 
 
 router.param('id', (req, res, next, id) => {
@@ -25,6 +25,12 @@ router.get('/', (req, res, next) => {
 router.get('/:id', (req, res, next) => {
     res.send(req.product)
 })
+
+router.post('/:id/review', (req, res, next) => {
+    Review.create(req.body)
+      .then(review => res.json(review))
+      .catch(next);
+});
 
 router.delete('/:id', (req, res, next) => {
     req.product.destroy()

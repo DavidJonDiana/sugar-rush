@@ -49,7 +49,7 @@ export class SingleProductDetails extends Component {
                 </Grid.Column>
             </Grid>
           <ReviewList />
-          <ReviewForm product={this.props.currentProduct} />
+          <ReviewForm product={this.props.currentProduct} user={this.props.user} />
           </div>
         )
     }
@@ -57,7 +57,8 @@ export class SingleProductDetails extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        currentProduct: state.currentProduct
+      currentProduct: state.currentProduct,
+      user: state.user
     }
 }
 
