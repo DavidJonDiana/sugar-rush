@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import toastr from 'toastr'
 
 /**
  * ACTION TYPES
@@ -34,7 +35,7 @@ export function getReviewsThunk() {
       .then(reviews => {
         dispatch(getReviews(reviews))
       })
-      .catch(console.error)
+      .catch(()  => toastr.error('Sorry! Reviews cannot be displayed.'))
   }
 }
 
@@ -45,7 +46,7 @@ export function addReviewThunk(reviewData) {
       .then(review => {
         dispatch(addReview(review))
       })
-      .catch(console.error)
+      .catch(() => toastr.error('Sorry! Your review was not added. Please fill in the form.'))
   }
 }
 
