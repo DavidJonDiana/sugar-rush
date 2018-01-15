@@ -1,27 +1,46 @@
-import React from 'react';
-import { Item, Button, Label } from 'semantic-ui-react';
+import React, { Component } from 'react';
+import { Item, Button, Input } from 'semantic-ui-react';
 
-const CartListItem = (props) => {
-    const { imageUrl, name, price, description, id, category } = props.product;
-    return (
-        <Item>
-            <Item.Image src={imageUrl} />
+class CartListItem extends Component {
 
-            <Item.Content>
-                <Item.Header as='a'>{name}</Item.Header>
-                <Item.Meta>
-                    <span className='category'>{category}</span>
-                </Item.Meta>
-                <Item.Description>{description}</Item.Description>
-                <Item.Extra>
-                    <Button primary floated='right'>
-                        Remove From Cart
-                    </Button>
-                    <Label>Quantity</Label>
-                </Item.Extra>
-            </Item.Content>
-        </Item>
-    )
+    constructor(props) {
+        super(props)
+        this.state = {
+            quantity: this.props.quantity
+        }
+        this.handleInputChange = this.handleInputChange.bind(this)
+
+    }
+
+    handleInputChange(e, o) {
+        this.setState({ quantity: o.value })
+    }
+    
+    render() {
+        const { title, description, imageUrl, category, id } = this.props.product
+        return (
+            <Item>
+                <Item.Image size="tiny" src={imageUrl} />
+                <Item.Content>
+                    <Item.Header as="a">{title}</Item.Header>
+                    <Item.Meta>
+                        <span className="category">{category}</span>
+                    </Item.Meta>
+                    <Item.Description>{description}</Item.Description>
+                    <Item.Extra>
+                        <Button onClick={() => this.props.updateCart(id, 0)} primary floated="right">
+                            Remove From Cart
+                        </Button>
+                        <Input onChange={this.handleInputChange} placeholder="Quantity" defaultValue={this.props.quantity} floated="right">
+                            <input />
+                            <Button onClick={() => this.props.updateCart(id, +this.state.quantity)}>Update</Button>
+                        </Input>
+                    </Item.Extra>
+                </Item.Content>
+            </Item>
+        )
+
+    }
 }
 
-export default CartListItem;
+export default CartListItem
