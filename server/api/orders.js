@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {Order, OrderedProducts, Product} = require('../db/models');
+const {Order, OrderedProducts, Product, User} = require('../db/models');
 
 router.param('id', (req, res, next, id) => {
   Order.findById(id)
@@ -25,31 +25,34 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
   req.body.payment = Order.createPayment(req.body.cardNumber, req.body.expDate)
 
-
-
   //req.body.cart = shopping cart object
-  Order.build(req.body)
+  const newOrder = Order.build(req.body)
+  console.log('new order is ', newOrder)
+  User.findById(req.body.user.id)
+    .then(user => newOrder.setUser(user))
+    .then(order => order.save())
+    .catch(console.err)
     .then(order => {
-      let productIds = Object.keys(req.body.cart)
-      //create a join table for each product ordered
-      productIds.forEach(productId => {
-        let quantity = req.body.cart[productId]
-        Product.findById(Number(productId))
-          .then(product => {
+    let productIds = Object.keys(req.body.cart)
+    //create a join table for each product ordered
+    productIds.forEach(productId => {
+      let quantity = req.body.cart[productId]
+      Product.findById(Number(productId))
+        .then(product => {
 
-            OrderedProducts.build({
-              quantity,
-              itemPrice: product.price,
-            })
-            .then(op => op.setOrder(order))
-            .then(op => op.setProduct(product))
-            .then(op => op.save())
-            .catch(console.error)
+          const OP = OrderedProducts.build({
+            quantity,
+            itemPrice: product.price,
           })
+          OP.setOrder(order)
+          .then(op => op.setProduct(product))
+          .then(op => op.save())
+          .catch(console.error)
         })
       })
-    .then(() => res.sendStatus(201))
-    .catch(console.error)
+    })
+  .then(() => res.sendStatus(201))
+  .catch(console.error)
 })
 
 router.get('/:id', (req, res, next) => {

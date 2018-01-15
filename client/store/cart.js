@@ -17,7 +17,8 @@ export const getCart = () => ({type: GET_CART})
 export const clearCart = () => ({type: CLEAR_CART})
 
 export const makeOrder = order => dispatch => {
-    axios.post('/api/order', order)
+    console.log('hi Im a thunk')
+    axios.post('/api/orders', order)
         //need to redirect to user homepage
         .then(res => {
             toastr.success('Order Completed!')
