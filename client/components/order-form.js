@@ -21,7 +21,7 @@ export class OrderForm extends Component {
   }
 
   handleSubmit() {
-    this.props.makeOrder({...this.state, user: this.props.user})
+    this.props.makeOrder({...this.state, user: this.props.user, cart: this.props.cart})
     console.log('submitted', this.state)
   }
 
