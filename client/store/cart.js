@@ -36,10 +36,12 @@ export default function (state = initialState, action) {
             if (state[action.productId]) {
                 const newState = {...state}
                 newState[action.productId] = state[action.productId] + action.quantity
+                toastr.success('Product Added To Cart!')
                 return newState
             } else {
                 const newState = {...state}
                 newState[action.productId] = action.quantity
+                toastr.success('Product Added To Cart!')
                 return newState
             }
         case GET_CART:
