@@ -1,12 +1,33 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { Button, Modal } from 'semantic-ui-react'
-import OrderForm from 'order-form'
+import OrderForm from './order-form'
 
-const OrderFormModal = () => (
-  <Modal trigger={<Button>Order</Button>}>
-    <Modal.Header>Order</Modal.Header>
-    <Modal.Content><OrderForm /></Modal.Content>
-  </Modal>
-)
+class OrderFormModal extends Component {
+  constructor() {
+    super()
+    this.state = {
+      isOpen: false
+    }
+    this.toggleModal = this.toggleModal.bind(this)
+  }
+
+  toggleModal() {
+    this.setState({isOpen: !this.state.isOpen})
+  }
+
+  render() {
+    return (
+      <Modal
+        trigger={<Button onClick={this.toggleModal}>Order</Button>}
+        open={this.state.isOpen}
+      >
+        <Modal.Header>Order</Modal.Header>
+        <Modal.Content>
+          <OrderForm toggleModal={this.toggleModal} />
+        </Modal.Content>
+      </Modal>
+    )
+  }
+}
 
 export default OrderFormModal
