@@ -9,4 +9,6 @@ export {Login, Signup} from './auth-form'
 export { default as ProductList } from './product-list'
 export { default as SingleProductDetails } from './single-product-details'
 export { default as ReviewList } from './review-list'
-export { default as ReviewForm } from './review-form'
+export { default as ReviewForm } from './review-form';
+export { default as CartList } from './cart-list';
+export { default as CartListItem } from './cart-list-item';
