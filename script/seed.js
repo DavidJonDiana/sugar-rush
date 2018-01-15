@@ -44,7 +44,7 @@ function createProducts(num) {
     let product = Product.build({
       title: chance.animal() + ' candy',
       description: chance.sentence(),
-      price: chance.floating({min: 0, fixed: 2, max: 100}),
+      price: chance.integer({min: 100, max: 20000}),
       inventoryQuantity: chance.integer({min: 0, max: 500}),
       category: chance.pickone(['chocolate', 'sweet', 'strange', 'gum', 'normal'])
     })
@@ -59,8 +59,12 @@ function createOrders(num, users, products) {
     const order = Order.build({
       completed: chance.bool(),
       shipped: false,
-      comments: chance.paragraph()
+      shippingAddress: chance.address(),
     })
+    order.payment = Order.createPayment('1234123412341234', '12/2010')
+    const user = chance.pickone(users)
+    order.setUser(user)
+    order.email = user.email
     orderModelArray.push(order)
   }
   return orderModelArray
