@@ -23,15 +23,18 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-  req.body.payment = Order.createPayment(req.body.cardNumber, req.body.expDate)
+  const payment = Order.createPayment(req.body.cardNumber, req.body.expDate)
+  const {shippingAddress, email, user} = req.body
 
   //req.body.cart = shopping cart object
-  const newOrder = Order.build(req.body)
-  console.log('new order is ', newOrder)
-  User.findById(req.body.user.id)
-    .then(user => newOrder.setUser(user))
-    .then(order => order.save())
-    .catch(console.err)
+  Order.create({
+    shippingAddress,
+    payment,
+    email
+  })
+  .then(newOrder => {
+    console.log('user.id is' + user.id)
+    newOrder.setUser(user.id)
     .then(order => {
     let productIds = Object.keys(req.body.cart)
     //create a join table for each product ordered
@@ -47,10 +50,11 @@ router.post('/', (req, res, next) => {
           OP.setOrder(order)
           .then(op => op.setProduct(product))
           .then(op => op.save())
-          .catch(console.error)
         })
+        .catch(console.error)
       })
     })
+  })
   .then(() => res.sendStatus(201))
   .catch(console.error)
 })

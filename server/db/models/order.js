@@ -21,8 +21,7 @@ const Order = db.define('order', {
     }
   },
   payment: {
-    type: Sequelize.STRING,
-    allowNull: false
+    type: Sequelize.STRING
   }
 })
 
