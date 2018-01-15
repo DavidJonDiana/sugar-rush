@@ -25,8 +25,10 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
   req.body.payment = Order.createPayment(req.body.cardNumber, req.body.expDate)
 
+
+
   //req.body.cart = shopping cart object
-  Order.create(req.body)
+  Order.build(req.body)
     .then(order => {
       let productIds = Object.keys(req.body.cart)
       //create a join table for each product ordered
@@ -35,12 +37,14 @@ router.post('/', (req, res, next) => {
         Product.findById(Number(productId))
           .then(product => {
 
-            OrderedProducts.create({
+            OrderedProducts.build({
               quantity,
               itemPrice: product.price,
-              order,
-              product
             })
+            .then(op => op.setOrder(order))
+            .then(op => op.setProduct(product))
+            .then(op => op.save())
+            .catch(console.error)
           })
         })
       })
@@ -52,3 +56,4 @@ router.get('/:id', (req, res, next) => {
   res.json(req.order)
 })
 
+module.exports = router;
