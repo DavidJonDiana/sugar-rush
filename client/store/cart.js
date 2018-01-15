@@ -2,15 +2,15 @@ import toastr from 'toastr';
 import axios from 'axios';
 
 const ADD_TO_CART = 'ADD_PRODUCT_TO_CART';
-const GET_CART = 'GET_CART'
-const GET_CART_ITEM = 'GET_CART_ITEM';
+const GET_CART = 'GET_CART';
+const UPDATE_CART = 'UPDATE_CART';
 
 const initialState = {};
 
 
 export const addToCart = (productId, quantity) => ({ type: ADD_TO_CART, productId, quantity });
 export const getCart = () => ({type: GET_CART})
-
+export const updateCart = (productId, quantity) => ({type: UPDATE_CART, productId, quantity})
 
 
 export default function (state = initialState, action) {
@@ -27,6 +27,16 @@ export default function (state = initialState, action) {
             }
         case GET_CART:
             return state;
+        case UPDATE_CART:
+            if (action.quantity === 0) {
+                const newState = { ...state }
+                delete newState[action.productId]
+                return newState;
+            } else {
+                const newState = { ...state }
+                newState[action.productId] = action.quantity
+                return newState;
+            }
         default:
             return state;
     }

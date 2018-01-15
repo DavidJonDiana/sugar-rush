@@ -1,46 +1,46 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { Item, Button, Label } from 'semantic-ui-react';
-import { getCurrentProductThunk } from '../store/currentProduct'
+import { Item, Button, Input } from 'semantic-ui-react';
 
 class CartListItem extends Component {
 
-    componentDidMount() {
-        this.props.getCurrentProduct(this.props.productId);
+    constructor(props) {
+        super(props)
+        this.state = {
+            quantity: this.props.quantity
+        }
+        this.handleInputChange = this.handleInputChange.bind(this)
+
     }
 
-    render () {
-        const { title, description, imageUrl, category } = this.props.currentProduct
+    handleInputChange(e, o) {
+        this.setState({ quantity: o.value })
+    }
+    
+    render() {
+        const { title, description, imageUrl, category, id } = this.props.product
         return (
             <Item>
-                <Item.Image size='small' src={imageUrl} />
+                <Item.Image size="tiny" src={imageUrl} />
                 <Item.Content>
-                    <Item.Header as='a'>{title}</Item.Header>
+                    <Item.Header as="a">{title}</Item.Header>
                     <Item.Meta>
-                        <span className='category'>{category}</span>
+                        <span className="category">{category}</span>
                     </Item.Meta>
                     <Item.Description>{description}</Item.Description>
                     <Item.Extra>
-                        <Button primary floated='right'>
+                        <Button onClick={() => this.props.updateCart(id, 0)} primary floated="right">
                             Remove From Cart
-                    </Button>
-                        <Label>Quantity: {this.props.quantity}</Label>
+                        </Button>
+                        <Input onChange={this.handleInputChange} placeholder="Quantity" defaultValue={this.props.quantity} floated="right">
+                            <input />
+                            <Button onClick={() => this.props.updateCart(id, +this.state.quantity)}>Update</Button>
+                        </Input>
                     </Item.Extra>
                 </Item.Content>
             </Item>
         )
-    }
-}
-   
 
-const mapStateToProps = (state) => {
-    return {
-        currentProduct: state.currentProduct
     }
 }
 
-const mapDispatchToProps = { getCurrentProduct: getCurrentProductThunk}
-
-const CartListItemContainer = connect(mapStateToProps, mapDispatchToProps)(CartListItem);
-
-export default CartListItemContainer;
+export default CartListItem
