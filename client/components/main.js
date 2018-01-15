@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {withRouter, Link} from 'react-router-dom'
+import {withRouter, Link } from 'react-router-dom'
 import {logout} from '../store'
 
 /**
@@ -15,7 +15,9 @@ const Main = (props) => {
 
   return (
     <div>
-      <h1>BOILERMAKER</h1>
+      <h1>Sugar Rush</h1>
+      <h3>Online Candy Shop</h3>
+      <img style={{ height: 100, width: 100 }}src="https://vignette.wikia.nocookie.net/clubpenguin/images/8/86/Lollipop_Pin.PNG/revision/latest?cb=20140323204916" />
       <nav>
         <Link to="/">Home</Link>
         {
