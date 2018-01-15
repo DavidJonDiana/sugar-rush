@@ -4,6 +4,7 @@ import { Grid, Item, Button } from 'semantic-ui-react';
 import CartListItem from './cart-list-item';
 import { getCart, updateCart } from '../store/cart';
 import { getProductsThunk } from '../store/products';
+import OrderModal from './order-modal';
 
 export class CartList extends Component {
 
@@ -20,11 +21,11 @@ export class CartList extends Component {
             <Grid>
                 <Grid.Column width={10}>
                     <Item.Group>
-                        {       
+                        {
                             cartIds.map(singleId => {
                                 let cartItem = this.props.products.find(product => product.id === +singleId)
-                                return <CartListItem key={singleId} 
-                                            product={cartItem} 
+                                return <CartListItem key={singleId}
+                                            product={cartItem}
                                             quantity={this.props.cart[singleId]}
                                             updateCart={this.props.updateCart}
                                             />
@@ -33,7 +34,7 @@ export class CartList extends Component {
                     </Item.Group>
                 </Grid.Column>
                 <Grid.Column width={6}>
-                    checkout 
+                    <OrderModal />
                 </Grid.Column>
             </Grid>
         )

@@ -18,7 +18,7 @@ class OrderFormModal extends Component {
   render() {
     return (
       <Modal
-        trigger={<Button onClick={this.toggleModal}>Order</Button>}
+        trigger={<Button positive onClick={this.toggleModal}>Checkout</Button>}
         open={this.state.isOpen}
       >
         <Modal.Header>Order</Modal.Header>
