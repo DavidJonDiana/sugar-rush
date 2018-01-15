@@ -42,14 +42,12 @@ router.post('/', (req, res, next) => {
       let quantity = req.body.cart[productId]
       Product.findById(Number(productId))
         .then(product => {
-
-          const OP = OrderedProducts.build({
+          const OP = OrderedProducts.create({
             quantity,
             itemPrice: product.price,
           })
-          OP.setOrder(order)
+          .then(op => op.setOrder(order))
           .then(op => op.setProduct(product))
-          .then(op => op.save())
         })
         .catch(console.error)
       })
