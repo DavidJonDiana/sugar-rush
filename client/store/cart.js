@@ -1,11 +1,17 @@
+import toastr from 'toastr';
+import axios from 'axios';
+
 const ADD_TO_CART = 'ADD_PRODUCT_TO_CART';
 const GET_CART = 'GET_CART'
+const GET_CART_ITEM = 'GET_CART_ITEM';
 
 const initialState = {};
 
 
 export const addToCart = (productId, quantity) => ({ type: ADD_TO_CART, productId, quantity });
 export const getCart = () => ({type: GET_CART})
+
+
 
 export default function (state = initialState, action) {
     switch (action.type) {
@@ -19,7 +25,7 @@ export default function (state = initialState, action) {
                 newState[action.productId] = action.quantity
                 return newState
             }
-        case GET_CART: 
+        case GET_CART:
             return state;
         default:
             return state;
