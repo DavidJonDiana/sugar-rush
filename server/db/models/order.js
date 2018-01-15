@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
+const crypto = require('crypto')
 
 const Order = db.define('order', {
   completed: {
@@ -10,8 +11,17 @@ const Order = db.define('order', {
     type: Sequelize.BOOLEAN,
     defaultValue: false
   },
-  comments: {
+  shippingAddress: {
     type: Sequelize.TEXT
+  },
+  email: {
+    type: Sequelize.STRING,
+    validate: {
+      isEmail: true
+    }
+  },
+  payment: {
+    type: Sequelize.STRING
   }
 })
 
@@ -23,5 +33,18 @@ Order.prototype.getTotal = function() {
       return ops.map(op => op.subtotal).reduce((a, b) => a + b)
     })
 }
+
+//class methods
+
+Order.createPayment = function(cardNumber, expDate) {
+
+  let encryptedCardNumber = crypto
+      .createHash('RSA-SHA256')
+      .update(cardNumber)
+      .digest('hex')
+
+  return encryptedCardNumber + ' - ' + expDate
+}
+
 
 module.exports = Order

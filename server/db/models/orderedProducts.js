@@ -7,7 +7,7 @@ const OrderedProducts = db.define('orderedProducts', {
     allowNull: false
   },
   itemPrice: {
-    type: Sequelize.FLOAT,
+    type: Sequelize.INTEGER,
     allowNull: false
   },
   subtotal: {
