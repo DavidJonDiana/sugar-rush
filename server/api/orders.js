@@ -1,5 +1,7 @@
 const router = require('express').Router();
-const {Order, OrderedProducts, Product, User} = require('../db/models');
+const { Order, OrderedProducts, Product, User } = require('../db/models');
+const accessControl = require('../utils/accessControl')
+
 
 router.param('id', (req, res, next, id) => {
   Order.findById(id)
@@ -16,7 +18,7 @@ router.param('id', (req, res, next, id) => {
       .catch(next);
 })
 
-router.get('/', (req, res, next) => {
+router.get('/', accessControl.isAccountOwnerOrAdmin, (req, res, next) => {
   Order.findAll()
     .then(orders => res.json(orders))
     .catch(console.error)
@@ -57,7 +59,7 @@ router.post('/', (req, res, next) => {
   .catch(console.error)
 })
 
-router.get('/:id', (req, res, next) => {
+router.get('/:id', accessControl.isLoggedIn, accessControl.isAccountOwnerOrAdmin, (req, res, next) => {
   res.json(req.order)
 })
 
