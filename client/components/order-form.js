@@ -22,6 +22,7 @@ export class OrderForm extends Component {
 
   handleSubmit() {
     this.props.makeOrder({...this.state, user: this.props.user, cart: this.props.cart})
+    //OB/AZ - Remove console.log
     console.log('submitted', this.state)
   }
 
@@ -78,7 +79,9 @@ const mapDispatch = (dispatch, ownProps) => ({
     makeOrder(order) {
       dispatch(makeOrder(order))
     },
+    //OB/AZ - Unnecessary => Will naturally make way to component
     toggleModal: ownProps.toggleModal
 })
 
+//OB/AZ - Be consistent with exports and naming
 export default connect(mapState, mapDispatch)(OrderForm)

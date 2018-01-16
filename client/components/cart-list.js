@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
+//OB/AZ - Remove unused imports
 import { Grid, Item, Button } from 'semantic-ui-react';
 import CartListItem from './cart-list-item';
 import { getCart, updateCart } from '../store/cart';
@@ -10,10 +12,9 @@ export class CartList extends Component {
 
     componentDidMount() {
         this.props.getCart();
+        //OB/AZ - Not urgent - Don't load all products; only products in the Cart. Look to move to backend
         this.props.getProducts()
     }
-
-
 
     render() {
         let cartIds = Object.keys(this.props.cart);
@@ -24,11 +25,13 @@ export class CartList extends Component {
                         {
                             cartIds.map(singleId => {
                                 let cartItem = this.props.products.find(product => product.id === +singleId)
-                                return <CartListItem key={singleId}
-                                            product={cartItem}
-                                            quantity={this.props.cart[singleId]}
-                                            updateCart={this.props.updateCart}
-                                            />
+                                return (
+                                    <CartListItem
+                                        key={singleId}
+                                        product={cartItem}
+                                        quantity={this.props.cart[singleId]}
+                                        updateCart={this.props.updateCart}
+                                    />)
                             })
                         }
                     </Item.Group>

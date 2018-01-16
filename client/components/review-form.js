@@ -64,6 +64,7 @@ const mapStateToProps = (state) => {
   return {};
 }
 
+//OB/AZ - MapStateToProps = null
 const ReviewFormContainer = connect(mapStateToProps, mapDispatchToProps)(ReviewForm)
 
 export default ReviewFormContainer;

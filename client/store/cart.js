@@ -5,6 +5,8 @@ import history from '../history'
 const ADD_TO_CART = 'ADD_PRODUCT_TO_CART';
 const GET_CART = 'GET_CART'
 const CLEAR_CART = 'CLEAR_CART'
+
+// OB/AZ - Remove
 const MAKE_ORDER = 'MAKE_ORDER'
 const UPDATE_CART = 'UPDATE_CART';
 
@@ -19,11 +21,13 @@ export const updateCart = (productId, quantity) => ({type: UPDATE_CART, productI
 export const clearCart = () => ({type: CLEAR_CART})
 
 export const makeOrder = order => dispatch => {
+    // OB/AZ - Hi thunk
     console.log('hi Im a thunk')
     axios.post('/api/orders', order)
         //need to redirect to user homepage
         .then(res => {
             toastr.success('Order Completed!')
+            // OB/AZ - Invoke clearCart()
             dispatch(clearCart)
             history.push('/')
         })
@@ -36,6 +40,7 @@ export default function (state = initialState, action) {
             if (state[action.productId]) {
                 const newState = {...state}
                 newState[action.productId] = state[action.productId] + action.quantity
+                // OB/AZ - due this in action creator as this is a side effect in the reducer
                 toastr.success('Product Added To Cart!')
                 return newState
             } else {
@@ -56,6 +61,7 @@ export default function (state = initialState, action) {
                 delete newState[action.productId]
                 return newState;
             } else {
+                // OB/AZ - can be combined into one line
                 const newState = { ...state }
                 newState[action.productId] = action.quantity
                 return newState;

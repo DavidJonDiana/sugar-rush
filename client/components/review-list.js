@@ -6,6 +6,7 @@ import { getReviewsThunk } from '../store/reviews'
 
 class ReviewList extends Component {
 
+  //OB/AZ - remove constructor if you are not doing anything with it
   constructor(props) {
     super(props)
   }
