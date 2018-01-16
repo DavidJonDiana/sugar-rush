@@ -106,20 +106,3 @@ Main.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired
 }
-
-
-{/* <nav>
-        <Link to="/">Home</Link>
-        {
-          isLoggedIn
-            ? <div>
-              <Link to="/my-profile">My Profile</Link>
-              <Link to="/my-cart">View Cart</Link>
-              <a href="#" onClick={handleClick}>Logout</a>
-            </div>
-            : <div>
-              <Link to="/login">Login</Link>
-              <Link to="/signup">Sign Up</Link>
-            </div>
-        }
-      </nav> */}
