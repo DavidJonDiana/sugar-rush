@@ -56,7 +56,7 @@ export class SingleProductDetails extends Component {
                 <Divider vertical>And</Divider>
                 <Grid.Column>
                     <h3>Price</h3>
-                    <h4>{price}</h4>
+                    <h4>${price}</h4>
                     <Form>
                         <Form.Select onChange={this.handleSelectChange} placeholder='Select Amount' options={[{ text: 1, value: 1 }, { text: 2, value: 2 }, { text: 3, value: 3 }, { text: 4, value: 4 }, { text: 5, value: 5 }]} />
                         <Button onClick={this.handleAddToCart} type='submit'>Add To Cart</Button>
