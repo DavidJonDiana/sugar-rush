@@ -15,7 +15,10 @@ export class Main extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      activeItem: ''
+    }
+    this.handleItemClick = this.handleItemClick.bind(this)
   }
 
   handleItemClick(event, { name }) {
@@ -53,7 +56,7 @@ export class Main extends Component {
                   />
                   <Menu.Item floated="right">
                     <Button primary onClick={handleClick} floated="right">Log Out</Button>
-                  </Menu.Item>              
+                  </Menu.Item>
                 </Menu.Menu>
               : <Menu.Menu>
                 <Menu.Item as={ Link } to="/login"

@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { Item, Button, Form, Grid, Divider } from 'semantic-ui-react';
 import { connect } from 'react-redux'
 import { getCurrentProductThunk } from '../store/currentProduct';
-import { addToCart } from '../store/cart'
 import { ReviewList, ReviewForm } from './index'
-
+import toastr from 'toastr'
 
 
 export class SingleProductDetails extends Component {
@@ -19,11 +18,12 @@ export class SingleProductDetails extends Component {
     }
 
     componentDidMount() {
-        this.props.getCurrentProduct(this.props.match.params.id)
+        this.props.getCurrentProductThunk(this.props.match.params.id)
     }
 
     handleAddToCart() {
-        this.props.addToCart(this.props.currentProduct.id, this.state.quantity)
+        sessionStorage.setItem(this.props.currentProduct.id, this.state.quantity)
+        toastr.success('Product Added To Cart!')
     }
 
     handleSelectChange(e, o) {
@@ -77,16 +77,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        getCurrentProduct: (currentProductId) => {
-            dispatch(getCurrentProductThunk(currentProductId))
-        },
-        addToCart: (productId, quantity) => {
-            dispatch(addToCart(productId, quantity))
-        }
-    }
-}
+const mapDispatchToProps = ({getCurrentProductThunk})
 
 const SingleProductDetailsContainer = connect(mapStateToProps, mapDispatchToProps)(SingleProductDetails)
 
