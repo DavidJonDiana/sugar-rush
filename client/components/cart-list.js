@@ -4,6 +4,7 @@ import { Grid, Item, Button } from 'semantic-ui-react';
 import CartListItem from './cart-list-item';
 import { getCart, updateCart } from '../store/cart';
 import { getProductsThunk } from '../store/products';
+import OrderModal from './order-modal';
 
 export class CartList extends Component {
 
@@ -32,8 +33,8 @@ export class CartList extends Component {
                         }
                     </Item.Group>
                 </Grid.Column>
-                <Grid.Column width={6}>
-                    checkout 
+                <Grid.Column width={6} textAlign="center">
+                    <OrderModal /> 
                 </Grid.Column>
             </Grid>
         )
