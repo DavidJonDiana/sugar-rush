@@ -33,7 +33,7 @@ export class CartList extends Component {
                         }
                     </Item.Group>
                 </Grid.Column>
-                <Grid.Column width={6}>
+                <Grid.Column width={6} textAlign="center">
                     <OrderModal />
                 </Grid.Column>
             </Grid>

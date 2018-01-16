@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withRouter, Link } from 'react-router-dom'
+import { Menu, Button, Header } from 'semantic-ui-react';
 import {logout} from '../store'
 
 /**
@@ -10,35 +11,70 @@ import {logout} from '../store'
  *  else common to our entire app. The 'picture' inside the frame is the space
  *  rendered out by the component's `children`.
  */
-const Main = (props) => {
-  const {children, handleClick, isLoggedIn} = props
+export class Main extends Component {
 
-  return (
-    <div>
-      <h1>Sugar Rush</h1>
-      <h3>Online Candy Shop</h3>
-      <img style={{ height: 100, width: 100 }}src="https://vignette.wikia.nocookie.net/clubpenguin/images/8/86/Lollipop_Pin.PNG/revision/latest?cb=20140323204916" />
-      <nav>
-        <Link to="/">Home</Link>
-        {
-          isLoggedIn
-            ? <div>
-              {/* The navbar will show these links after you log in */}
-              <Link to="/my-profile">My Profile</Link>
-              <Link to="/my-cart">View Cart</Link>
-              <a href="#" onClick={handleClick}>Logout</a>
-            </div>
-            : <div>
-              {/* The navbar will show these links before you log in */}
-              <Link to="/login">Login</Link>
-              <Link to="/signup">Sign Up</Link>
-            </div>
-        }
-      </nav>
-      <hr />
-      {children}
-    </div>
-  )
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
+
+  handleItemClick(event, { name }) {
+    this.setState({ activeItem: name })
+  }
+
+  render() {
+    const {children, handleClick, isLoggedIn} = this.props
+    const { activeItem } = this.state
+    return (
+      <div>
+        <Header as="h1" textAlign="center">Sugar Rush</Header>
+        <Header as="h2" textAlign="center">Online Candy Shop</Header>
+        <Menu stackable size="huge">
+          <Menu.Item>
+            <img src="/Lollipop.png" />
+          </Menu.Item>
+          <Menu.Item as={ Link } to="/"
+            name="Home"
+            active={activeItem === 'Home'}
+            onClick={this.handleItemClick}
+          />
+          {
+            isLoggedIn
+              ? <Menu.Menu>
+                  <Menu.Item as={ Link } to="/my-profile"
+                    name="My Profile"
+                    active={activeItem === 'My Profile'}
+                    onClick={this.handleItemClick}
+                  />
+                  <Menu.Item as={ Link } to="/my-cart"
+                    name="My Cart"
+                    active={activeItem === 'My Cart'}
+                    onClick={this.handleItemClick}
+                  />
+                  <Menu.Item floated="right">
+                    <Button primary onClick={handleClick} floated="right">Log Out</Button>
+                  </Menu.Item>              
+                </Menu.Menu>
+              : <Menu.Menu>
+                <Menu.Item as={ Link } to="/login"
+                  name="Login"
+                  active={activeItem === 'Login'}
+                  onClick={this.handleItemClick}
+                />
+                <Menu.Item as={ Link } to="/signup"
+                  name="Signup"
+                  active={activeItem === 'Signup'}
+                  onClick={this.handleItemClick}
+                />
+              </Menu.Menu>
+          }
+        </Menu>
+        <hr />
+        {children}
+      </div>
+    )
+
+  }
 }
 
 /**
