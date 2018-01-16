@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
+//OB/AZ - Nice validations
 const Review = db.define('review', {
   rating: {
     type: Sequelize.INTEGER,

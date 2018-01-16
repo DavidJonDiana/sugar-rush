@@ -38,6 +38,7 @@ Order.prototype.getTotal = function() {
 
 Order.createPayment = function(cardNumber, expDate) {
 
+  //OB/AZ - Recommend using STRIPE or another API for credit card storage in the future
   let encryptedCardNumber = crypto
       .createHash('RSA-SHA256')
       .update(cardNumber)

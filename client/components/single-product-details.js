@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Item, Button, Form, Grid, Divider } from 'semantic-ui-react';
 import { connect } from 'react-redux'
+
+//import directly from the store due to *
 import { getCurrentProductThunk } from '../store/currentProduct';
 import { addToCart } from '../store/cart'
 import { ReviewList, ReviewForm } from './index'
@@ -14,6 +16,8 @@ export class SingleProductDetails extends Component {
         this.state = {
             quantity: 0
         }
+
+        //OB/AZ - Can use arrow functions instead of binding
         this.handleAddToCart = this.handleAddToCart.bind(this)
         this.handleSelectChange = this.handleSelectChange.bind(this)
     }
@@ -22,15 +26,17 @@ export class SingleProductDetails extends Component {
         this.props.getCurrentProduct(this.props.match.params.id)
     }
 
-    handleAddToCart() {
+    //OB/AZ - Class arrow function syntax - Not necessary - Need stage 2? preset for babel
+    handleAddToCart = () => {
         this.props.addToCart(this.props.currentProduct.id, this.state.quantity)
     }
 
-    handleSelectChange(e, o) {
+    handleSelectChange = (e, o) => {
         this.setState({quantity: o.value})
     }
 
     render () {
+        //OB/AZ - remove category if not using it
         const { imageUrl, title, description, category, price } = this.props.currentProduct
         return (
           <div>

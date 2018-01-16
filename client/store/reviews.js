@@ -41,6 +41,7 @@ export function getReviewsThunk() {
 
 export function addReviewThunk(reviewData) {
   return function thunk(dispatch) {
+    // OB/AZ - consider changing to just POST /api/reviews
     return axios.post(`/api/products/${reviewData.userId}/review`, reviewData)
       .then(res => res.data)
       .then(review => {

@@ -22,7 +22,7 @@ describe('Product routes', () => {
                 category: 'dont matter'
             })
         })
-
+    //OB/AZ - Maybe make more products to test
         it('GET /api/products', () => {
             return request(app)
             .get('/api/products')
@@ -30,8 +30,8 @@ describe('Product routes', () => {
             .then(res => {
               expect(res.body).to.be.an('array')
               expect(res.body.length).to.equal(1)
-                expect(res.body[0].title).to.equal('test product')
-                expect(res.body[0].price).to.equal(3.99)
+              expect(res.body[0].title).to.equal('test product')
+              expect(res.body[0].price).to.equal(3.99)
             })
         })
     })

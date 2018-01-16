@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import ProductListItem from './product-list-item';
 import { Card } from 'semantic-ui-react'
 import { getProductsThunk } from '../store/products'
+//OB/AZ - duplicate imports
 import { Search, Dropdown } from 'semantic-ui-react'
 
+//OB/AZ - Comment what this is doing; also maybe use a Set()?
 export const makeCategories = (products) => products.map(product => product.category).filter((cat, index, arr) => arr.indexOf(cat) === index)
 
 class ProductList extends Component {
@@ -42,6 +44,8 @@ class ProductList extends Component {
 
     let products = this.props.products;
     let selectedCategories = this.state.filterCategories
+
+    //OB/AZ - maybe put into a utility or instance method on class
     let categories = makeCategories(products)
 
     if (this.state.searchTerm) {
