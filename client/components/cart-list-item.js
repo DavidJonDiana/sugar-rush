@@ -15,7 +15,7 @@ class CartListItem extends Component {
     handleInputChange(e, o) {
         this.setState({ quantity: o.value })
     }
-    
+
     render() {
         const { title, description, imageUrl, category, id } = this.props.product
         return (
@@ -28,12 +28,12 @@ class CartListItem extends Component {
                     </Item.Meta>
                     <Item.Description>{description}</Item.Description>
                     <Item.Extra>
-                        <Button onClick={() => this.props.updateCart(id, 0)} primary floated="right">
+                        <Button onClick={() => this.props.removeItem(id)} primary floated="right">
                             Remove From Cart
                         </Button>
                         <Input onChange={this.handleInputChange} placeholder="Quantity" defaultValue={this.props.quantity} floated="right">
                             <input />
-                            <Button onClick={() => this.props.updateCart(id, +this.state.quantity)}>Update</Button>
+                            <Button onClick={() => this.props.updateItem(id, quantity)}>Update</Button>
                         </Input>
                     </Item.Extra>
                 </Item.Content>

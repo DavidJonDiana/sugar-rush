@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import {Form, Button} from 'semantic-ui-react'
 import {connect} from 'react-redux'
-import {makeOrder} from '../store/cart'
+import axios from 'axios'
+import toastr from 'toastr'
+import history from '../history'
 
 export class OrderForm extends Component {
   constructor(props) {
@@ -14,15 +16,22 @@ export class OrderForm extends Component {
       shippingAddress: '',
       cardNumber: '',
       expDate: '',
-      cart: this.props.cart || {}
+      cart: sessionStorage
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleSubmit() {
-    this.props.makeOrder({...this.state, user: this.props.user, cart: this.props.cart})
-    console.log('submitted', this.state)
+    const order = {...this.state, user: this.props.user}
+    axios.post('/api/orders', order)
+    .then(res => {
+      toastr.success('Order Completed!')
+      sessionStorage.clear()
+      //need to redirect to user homepage
+      return history.push('/')
+    })
+    .catch(() => toastr.error('Whoops - please make sure all fields are complete and try again'))
   }
 
   render() {
@@ -70,15 +79,7 @@ export class OrderForm extends Component {
 }
 
 const mapState = state => ({
-  cart: state.cart,
   user: state.user
 })
 
-const mapDispatch = (dispatch, ownProps) => ({
-    makeOrder(order) {
-      dispatch(makeOrder(order))
-    },
-    toggleModal: ownProps.toggleModal
-})
-
-export default connect(mapState, mapDispatch)(OrderForm)
+export default connect(mapState, null)(OrderForm)
