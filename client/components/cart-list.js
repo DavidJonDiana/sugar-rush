@@ -21,11 +21,11 @@ export class CartList extends Component {
             <Grid>
                 <Grid.Column width={10}>
                     <Item.Group>
-                        {       
+                        {
                             cartIds.map(singleId => {
                                 let cartItem = this.props.products.find(product => product.id === +singleId)
-                                return <CartListItem key={singleId} 
-                                            product={cartItem} 
+                                return <CartListItem key={singleId}
+                                            product={cartItem}
                                             quantity={this.props.cart[singleId]}
                                             updateCart={this.props.updateCart}
                                             />

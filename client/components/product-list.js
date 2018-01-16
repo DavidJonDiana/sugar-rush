@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ProductListItem from './product-list-item';
-import { Card } from 'semantic-ui-react'
 import { getProductsThunk } from '../store/products'
-import { Search, Dropdown } from 'semantic-ui-react'
+import { Search, Dropdown, Card, Header } from 'semantic-ui-react'
 
 export const makeCategories = (products) => products.map(product => product.category).filter((cat, index, arr) => arr.indexOf(cat) === index)
 
@@ -60,9 +59,7 @@ class ProductList extends Component {
 
     return (
       <div>
-        <div className="title">
-          <h3>Products</h3>
-        </div>
+        <Header as="h2">Products</Header>
         <div>
          <Search
             loading={this.state.isLoading}
@@ -70,11 +67,11 @@ class ProductList extends Component {
             value={this.state.searchTerm}
             showNoResults={false}
           />
+
           <Dropdown
             onChange={this.handleCategoryFilter}
             options={options}
             placeholder='Filter by category'
-            fluid
             multiple
             selection
           />
