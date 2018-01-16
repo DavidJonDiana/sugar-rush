@@ -34,7 +34,7 @@ export class CartList extends Component {
                     </Item.Group>
                 </Grid.Column>
                 <Grid.Column width={6} textAlign="center">
-                    <OrderModal /> 
+                    <OrderModal />
                 </Grid.Column>
             </Grid>
         )
